@@ -1,43 +1,88 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .register-container {
-  width: 300px;
-  margin: 50px auto;
-  padding: 30px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   text-align: center;
-  background-color: #fdfdfd;
+  width: 350px;
+  color: #fff;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .register-container h2 {
   margin-bottom: 20px;
-  color: #333;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #f1f1f1;
 }
 
 .register-input {
-  width: 90%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: 0.3s ease;
+}
+
+.register-input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid #00c6ff;
+  box-shadow: 0 0 10px #00c6ff;
 }
 
 .register-button {
-  width: 95%;
-  padding: 10px;
-  background-color: #28a745;
-  color: white;
-  font-size: 16px;
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
   cursor: pointer;
+  transition: 0.3s ease;
 }
 
 .register-button:hover {
-  background-color: #1e7e34;
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 198, 255, 0.5);
 }
 
 .register-container p {
-  margin-top: 15px;
-  font-size: 14px;
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+.register-container a {
+  color: #00c6ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-container a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
