@@ -1,0 +1,27 @@
+.ver-tareas-container {
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fefefe;
+  text-align: center;
+}
+
+.ver-tareas-container h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.ver-tareas-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ver-tareas-container li {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  text-align: left;
+}

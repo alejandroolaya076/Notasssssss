@@ -1,0 +1,38 @@
+.crear-tarea-container {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fefefe;
+  text-align: center;
+}
+
+.crear-tarea-container h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.crear-tarea-container input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.crear-tarea-container button {
+  width: 95%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.crear-tarea-container button:hover {
+  background-color: #1e7e34;
+}
