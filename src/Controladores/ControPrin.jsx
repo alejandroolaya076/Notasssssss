@@ -9,7 +9,7 @@ export default function useDashboard() {
   const cerrarSesion = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
-    setView(''); //   
+    setView('');    
     navigate('/'); 
   };
 

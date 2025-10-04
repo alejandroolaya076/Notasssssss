@@ -3,32 +3,36 @@ import { api } from '../Api';
 import { useNavigate } from 'react-router-dom';
 
 export default function useLogin() {
-  const [username, setUsername] = useState('');
+  const [correo, setCorreo] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (!username || !password) {
-      alert('Por favor ingresa usuario y contraseña');
+    if (!correo || !password) {
+      alert('Por favor ingresa correo y contraseña');
       return;
     }
 
     try {
       const res = await api.post('/login', {
-      nombre_usuario: username,
-      contraseña: password
+        correo,
+        password
       });
-      
 
       localStorage.setItem('token', res.data.token);
-      localStorage.setItem('username', username);
+      localStorage.setItem('rol', res.data.rol);
 
-      navigate('/Dashboard');
+   
+      if (res.data.rol === 'admin') {
+        navigate('/admin');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
-      console.log(err.response?.data);  
+      console.log(err.response?.data);
       alert(err.response?.data?.message || 'Error al iniciar sesión');
     }
   };
 
-  return { username, setUsername, password, setPassword, handleLogin };
+  return { correo, setCorreo, password, setPassword, handleLogin };
 }

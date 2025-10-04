@@ -1,13 +1,11 @@
 import axios from 'axios';
 
-// Crear la instancia de Axios
 export const api = axios.create({
-  baseURL: 'http://localhost:5000', // URL de tu backend
+  baseURL: 'http://localhost:5000', 
 });
 
-// Interceptor para enviar el token JWT en todas las peticiones
 api.interceptors.request.use(config => {
-  const token = localStorage.getItem('token'); // obtener token del localStorage
+  const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -16,7 +14,6 @@ api.interceptors.request.use(config => {
   return Promise.reject(error);
 });
 
-// Funciones para los endpoints del backend
 export const login = async (username, password) => {
   const res = await api.post('/login', { username, password });
   return res.data;
