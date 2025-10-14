@@ -1,38 +1,39 @@
 import { useState } from 'react';
-import { api } from '../Api';
+import { login } from '../Api';
 import { useNavigate } from 'react-router-dom';
 
 export default function useLogin() {
-  const [correo, setCorreo] = useState('');
-  const [password, setPassword] = useState('');
+  const [nombre_usuario, setNombreUsuario] = useState('');
+  const [contraseña, setContraseña] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (!correo || !password) {
-      alert('Por favor ingresa correo y contraseña');
+    if (!nombre_usuario || !contraseña) {
+      alert('Por favor ingresa usuario y contraseña');
       return;
     }
 
     try {
-      const res = await api.post('/login', {
-        correo,
-        password
-      });
+      const res = await login(nombre_usuario, contraseña);
 
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('rol', res.data.rol);
+      console.log(' Respuesta del backend:', res);
+      localStorage.setItem('token', res.token);
+      localStorage.setItem('rol', res.rol);
 
-   
-      if (res.data.rol === 'admin') {
-        navigate('/admin');
+
+      if (res.rol === 'administrador') {
+    
+        navigate('/Admin');
       } else {
-        navigate('/dashboard');
+       
+        navigate('/notas');
       }
+
     } catch (err) {
-      console.log(err.response?.data);
+      console.error(err);
       alert(err.response?.data?.message || 'Error al iniciar sesión');
     }
   };
 
-  return { correo, setCorreo, password, setPassword, handleLogin };
+  return { nombre_usuario, setNombreUsuario, contraseña, setContraseña, handleLogin };
 }

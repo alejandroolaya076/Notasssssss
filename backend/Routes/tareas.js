@@ -1,41 +1,28 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const db = require('../db');
 const router = express.Router();
+const db = require('../mysql');
 
-const SECRET = 'secreto123';
 
-function authMiddleware(req, res, next) {
-  const header = req.headers['authorization'];
-  if (!header) return res.status(403).json({ message: 'No autorizado' });
+router.post('/crear', (req, res) => {
+  const { titulo, usuarioId } = req.body;
 
-  const token = header.split(' ')[1];
-  jwt.verify(token, SECRET, (err, decoded) => {
-    if (err) return res.status(403).json({ message: 'Token inválido' });
-    req.user = decoded;
-    next();
-  });
-}
-
-router.post('/', authMiddleware, (req, res) => {
-  const { titulo } = req.body;
-  const usuarioId = req.user.id;
+  if (!titulo || !usuarioId)
+    return res.status(400).json({ message: 'Faltan datos' });
 
   db.query(
-    'INSERT INTO tareas (titulo, usuarioId) VALUES (?, ?)',
+    'INSERT INTO tareas (titulo, usuarioId, completada) VALUES (?, ?, false)',
     [titulo, usuarioId],
     (err) => {
-      if (err) return res.status(500).json({ message: 'Error al crear tarea' });
-      res.json({ message: 'Tarea creada correctamente' });
+      if (err) return res.status(500).json({ message: 'Error al crear nota' });
+      res.json({ message: 'Nota creada correctamente' });
     }
   );
 });
-
-router.get('/mis-tareas', authMiddleware, (req, res) => {
-  const usuarioId = req.user.id;
+router.get('/:usuarioId', (req, res) => {
+  const { usuarioId } = req.params;
 
   db.query('SELECT * FROM tareas WHERE usuarioId = ?', [usuarioId], (err, results) => {
-    if (err) return res.status(500).json({ message: 'Error al obtener tareas' });
+    if (err) return res.status(500).json({ message: 'Error al obtener notas' });
     res.json(results);
   });
 });

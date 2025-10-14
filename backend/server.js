@@ -1,23 +1,19 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-
-const usuariosRoutes = require('./Routes/usuarios');
-const tareasRoutes = require('./Routes/tareas');
-const authRoutes = require('./Routes/auth');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const usuarioRoutes = require('./Routes/usuarios');
+const tareaRoutes = require('./Routes/tareas');
 
 const app = express();
-const port = 3001;
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 
-app.use('/auth', authRoutes);       
-app.use('/usuarios', usuariosRoutes); 
-app.use('/tasks', tareasRoutes);   
+app.use('/usuarios', usuarioRoutes);
+app.use('/tareas', tareaRoutes);
 
-
-app.listen(port, () => {
-  console.log(`Servidor backend corriendo en http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(` Servidor corriendo en puerto ${PORT}`));

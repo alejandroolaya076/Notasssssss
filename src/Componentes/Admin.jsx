@@ -13,33 +13,29 @@ export default function AdminDashboard() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Correo</th>
+            <th>Nombre de Usuario</th>
             <th>Rol</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {usuarios.map((u) => (
-            <tr key={u.id_user}>
-              <td>{u.id_user}</td>
-              <td>{u.nombre}</td>
-              <td>{u.apellido}</td>
-              <td>{u.correo}</td>
+            <tr key={u.id}>
+              <td>{u.id}</td>
+              <td>{u.nombre_usuario}</td>
               <td>{u.rol}</td>
               <td>
                 <button
                   className="btn-edit"
                   onClick={() =>
-                    editarUsuario(u.id_user, u.rol === "admin" ? "usuario" : "admin")
+                    editarUsuario(u.id, u.rol === "administrador" ? "usuario" : "administrador")
                   }
                 >
                   Cambiar Rol
                 </button>
                 <button
                   className="btn-delete"
-                  onClick={() => eliminarUsuario(u.id_user)}
+                  onClick={() => eliminarUsuario(u.id)}
                 >
                   Eliminar
                 </button>

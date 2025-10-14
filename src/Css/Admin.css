@@ -2,7 +2,7 @@
   max-width: 900px;
   margin: 40px auto;
   padding: 20px;
-  background: #f8f9fa;
+  background: #0e0728;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   text-align: center;
@@ -10,7 +10,7 @@
 
 .admin-container h1 {
   margin-bottom: 20px;
-  color: #333;
+  color: #ffffff;
 }
 
 .admin-table {

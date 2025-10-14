@@ -1,8 +1,8 @@
 import axios from 'axios';
-
 export const api = axios.create({
-  baseURL: 'http://localhost:5000', 
+  baseURL: 'http://localhost:3001'
 });
+
 
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
@@ -10,36 +10,46 @@ api.interceptors.request.use(config => {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
-}, error => {
-  return Promise.reject(error);
-});
+}, error => Promise.reject(error));
 
-export const login = async (username, password) => {
-  const res = await api.post('/login', { username, password });
+
+export const register = async (nombre_usuario, contraseña) => {
+  const res = await api.post('/usuarios/register', { nombre_usuario, contraseña });
   return res.data;
 };
 
-export const register = async (username, password) => {
-  const res = await api.post('/register', { username, password });
+
+export const login = async (nombre_usuario, contraseña) => {
+  const res = await api.post('/usuarios/login', { nombre_usuario, contraseña });
+  return res.data; 
+};
+export const crearTarea = async (titulo, usuarioId) => {
+  const res = await api.post('/tareas/crear', { titulo, usuarioId });
   return res.data;
 };
 
-export const crearTarea = async (title, userId) => {
-  const res = await api.post('/tasks', { title, userId });
+
+export const obtenerTareas = async (usuarioId) => {
+  const res = await api.get(`/tareas/${usuarioId}`);
   return res.data;
 };
 
-export const obtenerTareas = async (userId) => {
-  const res = await api.get(`/tasks/${userId}`);
+export const getUsuarios = async () => {
+  const res = await api.get('/usuarios');
+  return res.data;
+};
+export const crearNota = async (id_usuario, titulo, contenido) => {
+  const res = await api.post("/notas", { id_usuario, titulo, contenido });
   return res.data;
 };
 
-export const subirImagen = async (taskId, imageBase64, contentType) => {
-  const res = await api.post('/images', { taskId, imageBase64, contentType });
+export const obtenerNotasUsuario = async (id_usuario) => {
+  const res = await api.get(`/notas/usuario/${id_usuario}`);
   return res.data;
 };
 
-export const obtenerImagenes = async (taskId) => {
-  const res = await api.get(`/images/${taskId}`);
+export const obtenerTodasLasNotas = async () => {
+  const res = await api.get("/notas");
   return res.data;
 };
+
